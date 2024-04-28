@@ -1,8 +1,11 @@
 {
     "rewrites": [
         {
-        "source": "/api/:path*",
-        "destination": "https://owen.football.app/api/:path*"
+            "source": "/api/:path*",
+            "methods": ["GET"],
+            "headers": {
+            "Access-Control-Allow-Origin": "*"
+            }
         }
     ]
 }
