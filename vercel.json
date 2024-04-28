@@ -1,7 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "https://www.fotmob.com/api/:path*",
+            "source": "/api/:path*",
             "destination": "https://owen.football.app/api/:path*"
         }
     ]

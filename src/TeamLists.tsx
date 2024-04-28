@@ -5,6 +5,7 @@ import axios from 'axios';
 import { enTokrTeam } from './constants/translateTeam';
 import SelectLeague from './SelectLeague';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from './constants/baseUrl';
 
 const TeamLists = () => {
 
@@ -15,7 +16,7 @@ const TeamLists = () => {
       const fetchData = async () => {
         try {
           setIsLoading(true)
-          const response = await axios.get(`/api/leagues?type=team&timezone=Asia/Seoul&id=${nowid}&tab=overview`);
+          const response = await axios.get(`${API_BASE_URL}/api/leagues?type=team&timezone=Asia/Seoul&id=${nowid}&tab=overview`);
           setTeamList(response.data.table[0].data.table.all);
           setIsLoading(false);
         } catch (error) {
