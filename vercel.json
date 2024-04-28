@@ -1,11 +1,11 @@
 {
-    "rewrites": [
-        {
-            "source": "/api/:path*",
-            "methods": ["GET"],
-            "headers": {
-            "Access-Control-Allow-Origin": "*"
-            }
+    "routes": [
+      {
+        "src": "/api/leagues",
+        "methods": ["GET"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
         }
+      }
     ]
-}
+  }
