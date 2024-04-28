@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { enTokrPosition } from './constants/translatePosition';
 import { ISquad } from './types/Squad';
 import { useParams } from 'react-router-dom';
+import { API_BASE_URL } from './constants/baseUrl';
 
 const TeamSquad = () => {
   const {teamid} = useParams()
@@ -14,7 +15,7 @@ const TeamSquad = () => {
       try {
         setIsLoading(true)
         // 프록시를 통해 API 요청
-        const response = await axios.get(`/api/teams?type=team&timezone=Asia/Seoul&id=${teamid}`);
+        const response = await axios.get(`${API_BASE_URL}/api/teams?type=team&timezone=Asia/Seoul&id=${teamid}`);
         setTeamSquad(response.data.squad);
         setIsLoading(false);
       } catch (error) {
