@@ -2,12 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { enTokrPosition } from './constants/translatePosition';
-import { ISquad } from './types/Squad';
+import { ISquad, Member } from './types/Squad';
 import { useParams } from 'react-router-dom';
+import PlayerDetail from './PlayerDetail';
 
 const TeamSquad = () => {
   const {teamid} = useParams()
   const [isLoading, setIsLoading] = useState(false);
+  const [isModal,setIsModal] = useState(false);
+  const [nowPlayer, setNowPlayer] = useState<Member>();
   const [teamSquad,setTeamSquad] = useState([])
   useEffect(() => {
     const fetchData = async () => {
@@ -27,22 +30,31 @@ const TeamSquad = () => {
   const translatePosition = (title:string) => {
     return enTokrPosition[title]
   }
-
+  const handleModal = (member:Member) => {
+    console.log(member)
+    setIsModal(prev => !prev)
+    setNowPlayer(member)
+  }
   return (
     <>
+      {isModal && 
+        <Modal>
+          <PlayerDetail player={nowPlayer!}/>
+        </Modal>
+      }
       {isLoading && <h1>Loading...</h1>}
       {teamSquad.map((squad:ISquad, idx) => (
         <SquadContainer key={idx}>
           <SquadTitle>{translatePosition(squad.title)}</SquadTitle>
           <SquadMembersContainer>
             {squad.members.map((member) => (
-                <MemberContainer key={member.id}>
+              <MemberContainer key={member.id} onClick ={() => handleModal(member)}>
                 <MemberImage src={`https://images.fotmob.com/image_resources/playerimages/${member.id}.png`} alt='avatar'/>
                 <MemberInfo>
-                    <p>{member.name}</p>
-                    <p>{member.cname}</p>
+                  <p>{member.name}</p>
+                  <p>{member.cname}</p>
                 </MemberInfo>
-                </MemberContainer>
+              </MemberContainer>
             ))}
           </SquadMembersContainer>  
         </SquadContainer>
@@ -94,7 +106,19 @@ const MemberImage = styled.img`
 const MemberInfo = styled.div`
   display: flex;
   flex-direction: column;
-  
+`;
+
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(94, 94, 94, 0.5);
+  z-index: 999;
 `;
 
 export default TeamSquad

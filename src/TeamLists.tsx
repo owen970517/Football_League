@@ -34,38 +34,36 @@ const TeamLists = () => {
     }
   return (
     <>
-      {isLoading ? <h1>Loading...</h1> :       
-        <>
-            <SelectLeague setNowId={setNowId}/>
-            <RankTable>
-                <RankHeader>
-                    <RankCell>순위</RankCell>
-                    <LogoCell>로고</LogoCell>
-                    <TeamtopNameCell>팀 이름</TeamtopNameCell>
-                    <RankCell>경기</RankCell>
-                    <RankCell>승</RankCell>
-                    <RankCell>패</RankCell>
-                    <RankCell>무</RankCell>
-                    <RankCell>득실차</RankCell>
-                    <RankCell>승점</RankCell>
-                </RankHeader>
-                {teamList.map((team) => (
-                    <RankRow key={team.id}>
-                    <RankCell>{team.idx}</RankCell>
-                    <LogoCell>
-                        <img src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.id}_small.png`} alt="logo" width="30" height="30"/>
-                    </LogoCell>
-                    <TeamNameCell to={`/${team.id}`}>{translateName(team.shortName)}</TeamNameCell>
-                    <RankCell>{team.played}</RankCell>
-                    <RankCell>{team.wins}</RankCell>
-                    <RankCell>{team.losses}</RankCell>
-                    <RankCell>{team.draws}</RankCell>
-                    <RankCell>{team.goalConDiff}</RankCell>
-                    <RankCell>{team.pts}</RankCell>
-                    </RankRow>
-                ))}
-            </RankTable>
-        </>
+    <SelectLeague setNowId={setNowId}/>
+      {isLoading ? <h1>Loading...</h1> :               
+      <RankTable>
+        <RankHeader>
+          <RankCell>순위</RankCell>
+          <LogoCell>로고</LogoCell>
+          <TeamtopNameCell>팀 이름</TeamtopNameCell>
+          <RankCell>경기</RankCell>
+          <RankCell>승</RankCell>
+          <RankCell>패</RankCell>
+          <RankCell>무</RankCell>
+          <RankCell>득실차</RankCell>
+          <RankCell>승점</RankCell>
+        </RankHeader>
+        {teamList.map((team) => (
+          <RankRow key={team.id}>
+          <RankCell>{team.idx}</RankCell>
+          <LogoCell>
+              <img src={`https://images.fotmob.com/image_resources/logo/teamlogo/${team.id}_small.png`} alt="logo" width="30" height="30"/>
+          </LogoCell>
+          <TeamNameCell to={`/${team.id}`}>{translateName(team.shortName)}</TeamNameCell>
+          <RankCell>{team.played}</RankCell>
+          <RankCell>{team.wins}</RankCell>
+          <RankCell>{team.losses}</RankCell>
+          <RankCell>{team.draws}</RankCell>
+          <RankCell>{team.goalConDiff}</RankCell>
+          <RankCell>{team.pts}</RankCell>
+          </RankRow>
+        ))}
+      </RankTable>
     }
     </>
   )

@@ -3,7 +3,7 @@ export interface ISquad {
     title: string;
 }
 
-interface Member {
+export interface Member {
     assists: number;
     ccode: string;
     cname: string;
