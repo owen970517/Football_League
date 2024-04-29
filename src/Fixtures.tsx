@@ -6,7 +6,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import styled from 'styled-components';
 import { IFixtures } from './types/Fixtures';
 import { useParams } from 'react-router-dom';
-import { API_BASE_URL } from './constants/baseUrl';
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
@@ -20,7 +19,7 @@ const Fixtures = () => {
       try {
         setIsLoading(true)
         // 프록시를 통해 API 요청
-        const response = await axios.get(`${API_BASE_URL}/api/teams?type=team&timezone=Asia/Seoul&id=${teamid}`);
+        const response = await axios.get(`/api/teams?type=team&timezone=Asia/Seoul&id=${teamid}`);
         setTeamFixtures(response.data.fixtures.allFixtures.fixtures);
         setIsLoading(false);
       } catch (error) {
